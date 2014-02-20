@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="rmi compiler" default="compile">
+    <target name="compile">
+        <rmic base="./bin" sourcebase="./src"
+            classname="br.ifce.edu.ppd.client.Notify" />
+    	<rmic base="./bin" sourcebase="./src"
+    	            classname="br.ifce.edu.ppd.server.ServerController" />
+    	    	
+    </target>
+</project>
