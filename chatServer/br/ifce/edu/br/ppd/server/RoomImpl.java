@@ -1,4 +1,4 @@
-package br.sifce.edu.br.ppd.server;
+package br.ifce.edu.br.ppd.server;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;

@@ -7,7 +7,7 @@ import java.rmi.server.UnicastRemoteObject;
 import br.ifce.edu.br.ppd.commons.Client;
 import br.ifce.edu.br.ppd.commons.IRoom;
 import br.ifce.edu.br.ppd.commons.User;
-import br.sifce.edu.br.ppd.server.RoomImpl;
+import br.ifce.edu.br.ppd.server.RoomImpl;
 
 public class ClientImpl extends UnicastRemoteObject implements Client,Serializable{
 	/**

@@ -3,7 +3,7 @@ package br.ifce.edu.br.ppd.commons;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import br.sifce.edu.br.ppd.server.RoomImpl;
+import br.ifce.edu.br.ppd.server.RoomImpl;
 
 public interface Client extends Remote{
 	public boolean join(IRoom room) throws RemoteException;
