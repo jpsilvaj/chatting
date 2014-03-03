@@ -1,33 +1,36 @@
 package br.ifce.edu.br.ppd.commons;
 
-import java.io.Serializable;
+import java.util.UUID;
 
-public class User implements Serializable{
+public class User{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6043890892632974449L;
+	private UUID id;
 	private String username;
-	private Room room;
 	
 	public User(String username){
 		this.username = username;
-		this.room = new Room();
+		this.id = UUID.randomUUID();
+	}
+	
+	public User(){
+		this.id = UUID.randomUUID();
 	}
 
-	public Room getRoom() {
-		return room;
+	public UUID getId(){
+		return this.id;
 	}
-
-	public void setRoom(Room room) {
-		this.room = room;
-	}
-
+	
 	public String getUsername() {
 		return username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public String toString(){
+		return this.username;
 	}
 }
