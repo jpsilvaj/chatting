@@ -51,9 +51,9 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 	
 
 	@Override
-	public boolean createRoom(String roomName, User user) throws RemoteException {
+	public boolean createRoom(String roomName, User owner) throws RemoteException {
 		if(!rooms.containsKey(roomName)){
-			RoomImpl room = new RoomImpl(roomName, user); 
+			RoomImpl room = new RoomImpl(roomName, owner); 
 			rooms.put(roomName,room);
 			return true;
 		}

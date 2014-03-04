@@ -14,8 +14,16 @@ public class ListClientsPanel extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = -6324864731693820673L;
-	JTextArea listOfClients;
+	private JTextArea listOfClients;
 	
+	public JTextArea getListOfClients() {
+		return listOfClients;
+	}
+
+	public void setListOfClients(JTextArea listOfClients) {
+		this.listOfClients = listOfClients;
+	}
+
 	public ListClientsPanel(){
 		initListClientsPanel();
 	}

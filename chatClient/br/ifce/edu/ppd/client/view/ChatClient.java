@@ -51,7 +51,7 @@ public class ChatClient extends JFrame{
 	
 	private String showInputDialog(){
 	    String inputValue = JOptionPane.showInputDialog("Insira o nome do cliente");
-	    if(inputValue == null || inputValue.isEmpty() || !inputValue.matches("[A-Za-z]+[1-9]*")){
+	    if(inputValue == null || inputValue.isEmpty() || !inputValue.matches("[A-Za-z]+[\\s]*[1-9]*")){
 	        inputValue = showInputDialog();
 	    }
 	    return inputValue;

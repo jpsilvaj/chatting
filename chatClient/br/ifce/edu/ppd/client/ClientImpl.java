@@ -35,4 +35,8 @@ public class ClientImpl implements Client,Serializable{
 	public void receiveMessage(String message, String username) throws RemoteException {
 		ClientController.appendMessage(username + ": " + message);
 	}
+	
+	public String toString(){
+		return this.user.toString();
+	}
 }

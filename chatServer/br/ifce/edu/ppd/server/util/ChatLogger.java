@@ -6,4 +6,9 @@ import org.slf4j.LoggerFactory;
 public class ChatLogger {
 	
 	final Logger logger = LoggerFactory.getLogger(ChatLogger.class);
+	
+	public ChatLogger(){
+		//TODO: Implement log
+	}
 }
+

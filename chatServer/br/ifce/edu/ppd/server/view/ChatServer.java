@@ -8,7 +8,6 @@ import net.miginfocom.swing.MigLayout;
 import br.ifce.edu.ppd.commons.view.ListClientsPanel;
 
 public class ChatServer extends JFrame{
-
 	private static final long serialVersionUID = -370081278553197224L;
 	private ListClientsPanel clientsPanel = new ListClientsPanel();
 	private ChatLogPanel chatLogPanel = new ChatLogPanel(); 
@@ -29,4 +28,20 @@ public class ChatServer extends JFrame{
 		c.add(clientsPanel,"dock east, gapright 15, gapbottom 20");
 		c.add(chatLogPanel,"span 10");
 	}
+	public ListClientsPanel getClientsPanel() {
+		return clientsPanel;
+	}
+
+	public void setClientsPanel(ListClientsPanel clientsPanel) {
+		this.clientsPanel = clientsPanel;
+	}
+
+	public ChatLogPanel getChatLogPanel() {
+		return chatLogPanel;
+	}
+
+	public void setChatLogPanel(ChatLogPanel chatLogPanel) {
+		this.chatLogPanel = chatLogPanel;
+	}
+
 }

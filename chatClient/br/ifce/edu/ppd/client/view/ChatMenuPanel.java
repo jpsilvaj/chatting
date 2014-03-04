@@ -1,8 +1,6 @@
 package br.ifce.edu.ppd.client.view;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
@@ -10,10 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import br.ifce.edu.ppd.commons.util.Constants;
+import br.ifce.edu.ppd.server.Handler.MenuListener;
 
 public class ChatMenuPanel extends JPanel{
 	/**
@@ -37,13 +34,8 @@ public class ChatMenuPanel extends JPanel{
 		JMenuItem eMenuItem = new JMenuItem("Exit", exitIcon);
 		eMenuItem.setMnemonic(KeyEvent.VK_E);
 		eMenuItem.setToolTipText("Exit application");
-		eMenuItem.addActionListener( new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				System.exit(0);
-			}
-		});
-		
+		eMenuItem.setActionCommand("exit");
+		eMenuItem.addActionListener( new MenuListener());	
 		JMenu room = new JMenu("Room");
 		room.setMnemonic(KeyEvent.VK_R);
 		
@@ -52,24 +44,14 @@ public class ChatMenuPanel extends JPanel{
 		JMenuItem createRoomMenuItem = new JMenuItem("Create room", roomIcon);
 		createRoomMenuItem.setMnemonic(KeyEvent.VK_C);
 		createRoomMenuItem.setToolTipText("Create room");
-		createRoomMenuItem.addActionListener( new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				JOptionPane.showMessageDialog(null,"Not yet implemented");
-				//TODO: Create Room action
-			}
-		});
+		createRoomMenuItem.setActionCommand("create_room");
+		createRoomMenuItem.addActionListener(new MenuListener());
 		
 		JMenuItem deleteRoomMenuItem = new JMenuItem("Delete room", roomIcon);
 		deleteRoomMenuItem.setMnemonic(KeyEvent.VK_D);
 		deleteRoomMenuItem.setToolTipText("Delete room");
-		deleteRoomMenuItem.addActionListener( new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				JOptionPane.showMessageDialog(null,"Not yet implemented");
-				//TODO: Surrender action
-			}
-		});
+		deleteRoomMenuItem.setActionCommand("delete_room");
+		deleteRoomMenuItem.addActionListener( new MenuListener());
 		
 		JMenu help = new JMenu("Help");
 		help.setMnemonic(KeyEvent.VK_H);
@@ -78,12 +60,8 @@ public class ChatMenuPanel extends JPanel{
 		JMenuItem aboutMenuItem = new JMenuItem("About", aboutIcon);
 		aboutMenuItem.setMnemonic(KeyEvent.VK_A);
 		aboutMenuItem.setToolTipText("About application");
-		aboutMenuItem.addActionListener( new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				JOptionPane.showMessageDialog(null,Constants.ABOUT);
-			}
-		});
+		aboutMenuItem.setActionCommand("about");
+		aboutMenuItem.addActionListener(new MenuListener());
 		
 		file.add(eMenuItem);
 		room.add(createRoomMenuItem);

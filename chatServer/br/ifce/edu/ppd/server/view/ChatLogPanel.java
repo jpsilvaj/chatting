@@ -1,15 +1,11 @@
 package br.ifce.edu.ppd.server.view;
 
 import java.awt.Color;
-import java.util.logging.Logger;
-
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-
-import org.slf4j.impl.Log4jLoggerFactory;
 
 public class ChatLogPanel extends JPanel{
 	
