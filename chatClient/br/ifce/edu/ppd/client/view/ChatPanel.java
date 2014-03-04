@@ -41,12 +41,7 @@ public class ChatPanel extends JPanel implements ActionListener{
 		
 		textBox = new JTextField(80);
 		textBox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
-		textBox.addActionListener(new ActionListener(){
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		       //TODO: Utilizar mesmo para o botão
-		    }
-		});
+		textBox.addActionListener(this);
 		JButton send = new JButton("Send");
 		send.addActionListener(this);
 		
@@ -62,10 +57,13 @@ public class ChatPanel extends JPanel implements ActionListener{
 		
 	}
 
+	public void appendHistoryMessage(String message){
+		historyMessage.append(message + "\n");
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JOptionPane.showMessageDialog(null,"Not yet implemented");
-		//TODO: Implement action
-		
+		//TODO: Implement action		
 	}
 }

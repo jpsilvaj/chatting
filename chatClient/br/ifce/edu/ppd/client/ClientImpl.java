@@ -2,14 +2,11 @@ package br.ifce.edu.ppd.client;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 
-import br.ifce.edu.br.ppd.commons.Client;
-import br.ifce.edu.br.ppd.commons.IRoom;
-import br.ifce.edu.br.ppd.commons.User;
-import br.ifce.edu.br.ppd.server.RoomImpl;
+import br.ifce.edu.ppd.commons.Client;
+import br.ifce.edu.ppd.commons.User;
 
-public class ClientImpl extends UnicastRemoteObject implements Client,Serializable{
+public class ClientImpl implements Client,Serializable{
 	/**
 	 * 
 	 */
@@ -35,22 +32,7 @@ public class ClientImpl extends UnicastRemoteObject implements Client,Serializab
 	}
 
 	@Override
-	public String receiveMessage(String message, String username) throws RemoteException {
-		return username + ": " + message;
-	}
-
-	@Override
-	public void sendMessage(String message, IRoom room) throws RemoteException {
-		room.sendBroadcast(message, this.user.toString());
-	}
-
-	@Override
-	public boolean join(IRoom room) throws RemoteException {
-		return room.addUserToRoom(this);
-	}
-
-	@Override
-	public boolean exit(IRoom room) throws RemoteException {
-		return room.removeUserFromRoom(this);
+	public void receiveMessage(String message, String username) throws RemoteException {
+		ClientController.appendMessage(username + ": " + message);
 	}
 }

@@ -1,4 +1,4 @@
-package br.ifce.edu.br.ppd.commons.util;
+package br.ifce.edu.ppd.commons.util;
 
 public class Constants {
 	public static final String ROOM_DEFAULT = "HOME";

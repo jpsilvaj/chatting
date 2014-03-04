@@ -13,7 +13,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import br.ifce.edu.br.ppd.commons.util.Constants;
+import br.ifce.edu.ppd.commons.util.Constants;
 
 public class ChatMenuPanel extends JPanel{
 	/**
@@ -56,7 +56,7 @@ public class ChatMenuPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				JOptionPane.showMessageDialog(null,"Not yet implemented");
-				//TODO: Surrender action
+				//TODO: Create Room action
 			}
 		});
 		

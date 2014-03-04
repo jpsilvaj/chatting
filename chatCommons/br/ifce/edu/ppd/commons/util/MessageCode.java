@@ -1,4 +1,4 @@
-package br.ifce.edu.br.ppd.commons.util;
+package br.ifce.edu.ppd.commons.util;
 
 public enum MessageCode {
 	EXIT_MESSAGE("O jogador %username% saiu do chat"),

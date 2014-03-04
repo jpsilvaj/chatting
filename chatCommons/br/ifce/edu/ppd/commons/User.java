@@ -1,11 +1,10 @@
-package br.ifce.edu.br.ppd.commons;
+package br.ifce.edu.ppd.commons;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class User{
-	/**
-	 * 
-	 */
+public class User implements Serializable{
+	private static final long serialVersionUID = 3882541263489259793L;
 	private UUID id;
 	private String username;
 	

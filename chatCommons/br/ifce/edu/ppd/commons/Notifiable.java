@@ -1,4 +1,4 @@
-package br.ifce.edu.br.ppd.commons;
+package br.ifce.edu.ppd.commons;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

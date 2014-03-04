@@ -1,4 +1,4 @@
-package br.ifce.edu.br.ppd.commons.Exception;
+package br.ifce.edu.ppd.commons.Exception;
 
 public class FaultToRemoveRoomException {
 

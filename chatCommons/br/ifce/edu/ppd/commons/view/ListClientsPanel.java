@@ -1,4 +1,4 @@
-package br.ifce.edu.ppd.client.view;
+package br.ifce.edu.ppd.commons.view;
 
 import java.awt.Color;
 
@@ -26,7 +26,6 @@ public class ListClientsPanel extends JPanel{
 		JLabel listOfClientsLabel = new JLabel("Connected clients",JLabel.LEFT);
 		listOfClientsLabel.setAlignmentX(LEFT_ALIGNMENT);
 		listOfClientsLabel.setHorizontalAlignment(JLabel.LEFT);
-//		listOfClientsLabel.setVerticalAlignment(SwingConstants.TOP);
 		listOfClients = new JTextArea(12,12);
 		listOfClients.setEditable(false);
 		listOfClients.setLineWrap(true);
