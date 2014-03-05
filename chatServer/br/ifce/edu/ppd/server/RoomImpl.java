@@ -15,12 +15,12 @@ public class RoomImpl implements Serializable, IRoom{
 
 	private static final long serialVersionUID = -4384764306217268192L;
 	private String roomName;
-	private User owner;
+	private Client owner;
 	private Set<Client> clients = new HashSet<Client>();
 	
-	public RoomImpl(String roomName, User owner){
+	public RoomImpl(String roomName, Client client){
 		this.roomName = roomName;
-		this.owner = owner;
+		this.owner = client;
 	}
 	
 	public RoomImpl(){
@@ -61,7 +61,7 @@ public class RoomImpl implements Serializable, IRoom{
 	}
 
 	@Override
-	public User getOwner() {
+	public Client getOwner() {
 		return this.owner;
 	}
 

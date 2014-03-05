@@ -15,11 +15,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-public class ChatPanel extends JPanel implements ActionListener{
-	
-	/**
-	 * 
-	 */
+import br.ifce.edu.ppd.client.handler.ChatListener;
+
+public class ChatPanel extends JPanel{
 	private static final long serialVersionUID = 2355897564088181796L;
 	JScrollPane historyMessageScrolledPane;
 	JTextArea historyMessage;
@@ -41,9 +39,12 @@ public class ChatPanel extends JPanel implements ActionListener{
 		
 		textBox = new JTextField(80);
 		textBox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));
-		textBox.addActionListener(this);
+		textBox.setActionCommand("send_message");
+		textBox.addActionListener(new ChatListener());
+		
 		JButton send = new JButton("Send");
-		send.addActionListener(this);
+		send.setActionCommand("send_message");
+		send.addActionListener(new ChatListener());
 		
 		sendMessagePanel = new JPanel();
 		sendMessagePanel.setLayout(new FlowLayout());
@@ -59,11 +60,5 @@ public class ChatPanel extends JPanel implements ActionListener{
 
 	public void appendHistoryMessage(String message){
 		historyMessage.append(message + "\n");
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null,"Not yet implemented");
-		//TODO: Implement action		
 	}
 }

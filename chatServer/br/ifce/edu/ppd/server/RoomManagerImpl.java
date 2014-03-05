@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import br.ifce.edu.ppd.commons.Client;
 import br.ifce.edu.ppd.commons.IRoom;
 import br.ifce.edu.ppd.commons.IRoomManager;
@@ -48,10 +49,9 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 	public Set<Client> getClientsConnectedByRoomName(IRoom room){
 		return rooms.get(room.toString()).getClients();
 	}
-	
 
 	@Override
-	public boolean createRoom(String roomName, User owner) throws RemoteException {
+	public boolean createRoom(String roomName, Client owner) throws RemoteException {
 		if(!rooms.containsKey(roomName)){
 			RoomImpl room = new RoomImpl(roomName, owner); 
 			rooms.put(roomName,room);
@@ -63,16 +63,18 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 	}
 
 	@Override
-	public boolean deleteRoom(String roomName, User user) throws RemoteException {
-		
+	public boolean deleteRoom(String roomName, Client client) throws RemoteException {
 		if(rooms.containsKey(roomName)){
-			rooms.remove(roomName);
-			//TODO: Notify everyone from room
-			return true;
+			if(roomName.equalsIgnoreCase(Constants.ROOM_DEFAULT)){
+				return false;
+			}
+			else if(rooms.get(roomName).getOwner().toString().equals(client.toString())){
+				rooms.remove(roomName);
+				//TODO: Notify everyone from room
+				return true;
+			}
 		}
-		else{
-			return false;	
-		}
+		return false;	
 	}
 	
 	@Override
@@ -81,10 +83,11 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 	}
 	
 	@Override
-	public boolean addClientToRoom(Client client, String roomName){
+	public boolean addClientToRoom(String roomName, Client client){
 		if (!rooms.get(roomName).getClients().contains(client)){
 			rooms.get(roomName).getClients().add(client);
 			return true;
+			//TODO: Contains not return true
 		}
 		else{
 			return false;
@@ -95,6 +98,7 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 	public boolean removeClientFromRoom(Client client, String roomName){
 		if (rooms.get(roomName).getClients().contains(client)){
 			rooms.get(roomName).getClients().remove(client);
+			//TODO: Contains not return true
 			return true;
 		}
 		else{
