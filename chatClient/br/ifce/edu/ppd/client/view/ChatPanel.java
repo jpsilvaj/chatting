@@ -2,6 +2,8 @@ package br.ifce.edu.ppd.client.view;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -33,6 +35,11 @@ public class ChatPanel extends JPanel{
 		
 		historyMessageScrolledPane = new JScrollPane(historyMessage);
 		historyMessageScrolledPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		historyMessageScrolledPane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
+	        public void adjustmentValueChanged(AdjustmentEvent e) {  
+	            e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
+	        }
+	    });
 		
 		textBox = new JTextField(80);
 		textBox.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY));

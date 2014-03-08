@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.JOptionPane;
+import javax.swing.text.Document;
+
 import br.ifce.edu.ppd.client.ClientController;
 import br.ifce.edu.ppd.commons.util.MessageSingleton;
 
@@ -16,9 +19,16 @@ public class ChatListener implements ActionListener, WindowListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "send_message"){
 			String message = ClientController.getChatClient().getChatPanel().getTextBox().getText();
-			String username = ClientController.getChatClient().getClient().getUsername();
-			ClientController.sendMessageToRoom(messageSingleton.sendMessage(username, message));
-			ClientController.getChatClient().getChatPanel().getTextBox().setText("");
+			if(message == null || message.trim().equals("")){
+				JOptionPane.showMessageDialog(null, "Insert a quote to send");
+			}
+			else{
+				String username = ClientController.getChatClient().getClient().getUsername();
+				ClientController.sendMessageToRoom(messageSingleton.sendMessage(username, message));
+				ClientController.getChatClient().getChatPanel().getTextBox().setText("");
+				Document d = ClientController.getChatClient().getChatPanel().getTextBox().getDocument();
+				ClientController.getChatClient().getChatPanel().getTextBox().select(d.getLength(), d.getLength());
+			}
 			//TODO: Implement send message
 		}
 		

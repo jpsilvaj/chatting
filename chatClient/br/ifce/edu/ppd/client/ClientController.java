@@ -40,7 +40,7 @@ public class ClientController{
 			Timer timerUpdateClients = new Timer();
 			Timer timerUpdateChatMessage = new Timer();
 			timerUpdateClients.schedule(new TimerUpdateListOfClients(), 0, 2*1000);
-			timerUpdateChatMessage.schedule(new TimerUpdateChatMessage(),0, 2*1000);
+			timerUpdateChatMessage.schedule(new TimerUpdateChatMessage(),0, 1*100);
 			registryInRoom();
 			
 		} catch (MalformedURLException e) {
@@ -63,6 +63,8 @@ public class ClientController{
 			}
 			roomManager.addClientToRoom(roomNameToConnect, chatClient.getClient());
 			chatClient.getClient().setRoomNameConnected(roomNameToConnect);
+			String title = "Chat client - RMI: " + getChatClient().getClient().getUsername() + " in " + roomNameToConnect;
+			chatClient.setTitle(title);
 			hasConnected = true;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -78,6 +80,8 @@ public class ClientController{
 			Boolean teste = roomManager.addClientToRoom(Constants.ROOM_DEFAULT, chatClient.getClient());
 			if(teste){
 				hasConnected = true;
+				String title = "Chat client - RMI: " + getChatClient().getClient().getUsername() + " in " + Constants.ROOM_DEFAULT;
+				chatClient.setTitle(title);
 			}
 			else{
 				JOptionPane.showMessageDialog(null, "Cannot connect in room");
