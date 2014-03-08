@@ -7,7 +7,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 
 public class ListClientsPanel extends JPanel{
 	/**
@@ -15,14 +14,6 @@ public class ListClientsPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = -6324864731693820673L;
 	private JTextArea listOfClients;
-	
-	public JTextArea getListOfClients() {
-		return listOfClients;
-	}
-
-	public void setListOfClients(JTextArea listOfClients) {
-		this.listOfClients = listOfClients;
-	}
 
 	public ListClientsPanel(){
 		initListClientsPanel();
@@ -43,5 +34,12 @@ public class ListClientsPanel extends JPanel{
 		this.add(listOfClients);
 		
 	}
+	
+	public JTextArea getListOfClients() {
+		return listOfClients;
+	}
 
+	public void setListOfClients(JTextArea listOfClients) {
+		this.listOfClients = listOfClients;
+	}
 }

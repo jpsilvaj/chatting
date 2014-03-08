@@ -3,6 +3,8 @@
     <target name="compile">
     	<rmic base="./bin" sourcebase="chatServer"
     	            classname="br.ifce.edu.ppd.server.RoomManagerImpl" />
+    	<rmic base="./bin" sourcebase="chatClient"
+    				classname="br.ifce.edu.ppd.client.ClientImpl" />
     	    	
     </target>
 </project>

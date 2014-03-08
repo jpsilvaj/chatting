@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import net.miginfocom.swing.MigLayout;
 import br.ifce.edu.ppd.client.ClientImpl;
+import br.ifce.edu.ppd.client.handler.ChatListener;
 import br.ifce.edu.ppd.commons.view.ListClientsPanel;
 
 public class ChatClient extends JFrame{	
@@ -28,6 +29,7 @@ public class ChatClient extends JFrame{
 		this.setTitle("Chat client - RMI: " + this.client.getUser());
 		this.addPanels();
 		this.pack();
+		this.addWindowListener(new ChatListener());
 	}
 	
 	private void addPanels(){
@@ -50,8 +52,8 @@ public class ChatClient extends JFrame{
 	}
 	
 	private String showInputDialog(){
-	    String inputValue = JOptionPane.showInputDialog("Insira o nome do cliente");
-	    if(inputValue == null || inputValue.isEmpty() || !inputValue.matches("[A-Za-z]+[\\s]*[1-9]*")){
+	    String inputValue = JOptionPane.showInputDialog("Insert your username");
+	    if(inputValue == null || inputValue.isEmpty() || !inputValue.matches("[A-Za-z]+[1-9]*")){
 	        inputValue = showInputDialog();
 	    }
 	    return inputValue;

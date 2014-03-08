@@ -5,7 +5,9 @@ public enum MessageCode {
 	JOIN_MESSAGE("O jogador %username% entrou no chat"),
 	SEND_MESSAGE("%username%: %message%"),
 	SET_USERNAME("%username%=%newusername%"),
-	GET_USERNAME("%username%");
+	GET_USERNAME("%username%"),
+	CREATE_ROOM("The %username% created the room %roomname%"),
+	DELETE_ROOM("The %username% deleted the room %roomname%");
 	
 	private String label;
 	

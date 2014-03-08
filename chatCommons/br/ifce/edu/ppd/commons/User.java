@@ -3,8 +3,6 @@ package br.ifce.edu.ppd.commons;
 import java.io.Serializable;
 import java.util.UUID;
 
-import br.ifce.edu.ppd.client.ClientImpl;
-
 public class User implements Serializable{
 	private static final long serialVersionUID = 3882541263489259793L;
 	private UUID id;

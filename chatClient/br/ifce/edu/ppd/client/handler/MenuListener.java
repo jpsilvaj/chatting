@@ -2,11 +2,11 @@ package br.ifce.edu.ppd.client.handler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+
 import br.ifce.edu.ppd.client.ClientController;
-import br.ifce.edu.ppd.commons.IRoom;
 import br.ifce.edu.ppd.commons.util.Constants;
 
 public class MenuListener implements ActionListener{
@@ -14,15 +14,26 @@ public class MenuListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "exit"){
-			System.exit(0);
+			try{
+				ClientController.exitFromRoom();
+			}catch(Exception exception){
+				exception.printStackTrace();
+			}
+			finally{
+				System.exit(0);
+			}
 		}
 		else if(e.getActionCommand() == "connect_room"){
 			String roomNameToConnect = inputRoomSelected("Select room to connect");
-			ClientController.registryInRoom(roomNameToConnect);
+			if (roomNameToConnect != null){
+				ClientController.registryInRoom(roomNameToConnect);
+			}else{
+				JOptionPane.showMessageDialog(null, "Select a room to connect");	
+			}
 		}
 		else if(e.getActionCommand() == "disconnect_room"){
-			String roomNameToDisconnect = inputRoomSelected("Select room to disconnect");
-			ClientController.exitFromRoom(roomNameToDisconnect);
+			// Limit connection one room String roomNameToDisconnect = inputRoomSelected("Select room to disconnect");
+			ClientController.exitFromRoom();
 		}
 		else if(e.getActionCommand() == "create_room"){
 			String roomName = showInputDialog();
@@ -42,8 +53,8 @@ public class MenuListener implements ActionListener{
 	}
 	
 	private String showInputDialog(){
-	    String inputValue = JOptionPane.showInputDialog("Insira o nome da sala: ");
-	    if(inputValue == null || inputValue.isEmpty() || !inputValue.matches("[A-Za-z]+[\\s]*[1-9]*")){
+	    String inputValue = JOptionPane.showInputDialog("Insert the room name");
+	    if(inputValue == null || inputValue.isEmpty() || !inputValue.matches("[A-Za-z]+[1-9]*")){
 	        inputValue = showInputDialog();
 	    }
 	    return inputValue;
@@ -54,7 +65,5 @@ public class MenuListener implements ActionListener{
 		JOptionPane.showMessageDialog(null, listRooms, message, JOptionPane.PLAIN_MESSAGE);
 		String roomNameSelected = (String) listRooms.getSelectedValue();
 		return roomNameSelected;
-		
 	}
-	
 }

@@ -2,13 +2,10 @@ package br.ifce.edu.ppd.client.view;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -20,10 +17,10 @@ import br.ifce.edu.ppd.client.handler.ChatListener;
 public class ChatPanel extends JPanel{
 	private static final long serialVersionUID = 2355897564088181796L;
 	JScrollPane historyMessageScrolledPane;
-	JTextArea historyMessage;
+	private JTextArea historyMessage;
 	JPanel sendMessagePanel;
-	JTextField textBox;
-	
+	private JTextField textBox;
+
 	public ChatPanel(){
 		this.configureChat();
 	}
@@ -58,7 +55,20 @@ public class ChatPanel extends JPanel{
 		
 	}
 
-	public void appendHistoryMessage(String message){
-		historyMessage.append(message + "\n");
+	public JTextArea getHistoryMessage() {
+		return historyMessage;
 	}
+
+	public void setHistoryMessage(JTextArea historyMessage) {
+		this.historyMessage = historyMessage;
+	}
+	
+	public JTextField getTextBox() {
+		return textBox;
+	}
+
+	public void setTextBox(JTextField textBox) {
+		this.textBox = textBox;
+	}
+
 }

@@ -2,18 +2,20 @@ package br.ifce.edu.ppd.client;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 import br.ifce.edu.ppd.commons.Client;
 import br.ifce.edu.ppd.commons.User;
 import br.ifce.edu.ppd.commons.util.Constants;
 
-public class ClientImpl implements Client,Serializable{
+public class ClientImpl extends UnicastRemoteObject implements Client,Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3406115214810552789L;
 	private User user;
 	private String roomNameConnected;
+	private String historyMessage = "";
 	
 	protected ClientImpl(User user) throws RemoteException {
 		super();
@@ -24,6 +26,11 @@ public class ClientImpl implements Client,Serializable{
 	public ClientImpl() throws RemoteException{
 		super();
 		user = new User();
+		this.roomNameConnected = Constants.ROOM_DEFAULT;
+	}
+	
+	public String getUsername() {
+		return user.toString();
 	}
 	
 	public User getUser() {
@@ -42,9 +49,16 @@ public class ClientImpl implements Client,Serializable{
 		this.roomNameConnected = roomNameConnected;
 	}
 	
-	@Override
-	public void receiveMessage(String message, String username) throws RemoteException {
-		ClientController.appendMessage(username + ": " + message);
+	public String getHistoryMessage() {
+		return historyMessage;
+	}
+
+	public void appendHistoryMessage(String message) {
+		this.historyMessage += message + "\n";
+	}
+	
+	public void clearHistoryMessage(){
+		this.historyMessage = "";
 	}
 	
 	@Override
@@ -64,11 +78,16 @@ public class ClientImpl implements Client,Serializable{
 	    	return false;
 	    }
 	    ClientImpl client = (ClientImpl) o;
-	    return (user == client.getUser());
+	    return (user.getUsername().equals(client.getUser().getUsername()));
 	}
 	
 	@Override
 	public int hashCode(){
 		return this.user.getUsername().hashCode() + this.user.getId().hashCode();
+	}
+
+	@Override
+	public void receiveMessage(String message) throws RemoteException{
+		appendHistoryMessage(message);
 	}
 }

@@ -1,14 +1,11 @@
 package br.ifce.edu.ppd.server;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.HashSet;
 import java.util.Set;
-
 import br.ifce.edu.ppd.client.ClientImpl;
 import br.ifce.edu.ppd.commons.Client;
 import br.ifce.edu.ppd.commons.IRoom;
-import br.ifce.edu.ppd.commons.User;
 import br.ifce.edu.ppd.commons.util.Constants;
 
 public class RoomImpl implements Serializable, IRoom{
@@ -39,17 +36,6 @@ public class RoomImpl implements Serializable, IRoom{
 	public void setUsers(HashSet<Client> clients) {
 		this.clients = clients;
 	}
-	
-	@Override
-	public void sendBroadcast(String message, String username) {
-		try {
-			for( Client client : this.getClients()){
-				client.receiveMessage(message,username);
-			}
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public boolean join(ClientImpl client){
@@ -72,5 +58,10 @@ public class RoomImpl implements Serializable, IRoom{
 	
 	public String toString(){
 		return this.roomName;
+	}
+
+	@Override
+	public void sendBroadcast(String message, String username) {
+		// TODO Implement broadcastMessage
 	}
 }

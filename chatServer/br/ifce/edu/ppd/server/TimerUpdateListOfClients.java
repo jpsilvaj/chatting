@@ -14,19 +14,18 @@ public class TimerUpdateListOfClients extends TimerTask{
 	public void run() {
 		String newClients = "";
 		try {
-			for(IRoom room : ServerController.roomManager.getRoomList()){
+			for(IRoom room : ServerController.getRoomManager().getRoomList()){
 				for(Client client : room.getClients()){
-					newClients += ("Room:" + room + " Client:" + client.toString() + "\n");
+					newClients += ("Room:" + room + " Client:" + client.getUsername().toString() + "\n");
 				}
 			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(newClients.equals("")){
 			newClients = "None";
 		}
-		ServerController.chatServer.getClientsPanel().getListOfClients().setText(newClients);
+		ServerController.getChatServer().getClientsPanel().getListOfClients().setText(newClients);
 		
 	}
 	

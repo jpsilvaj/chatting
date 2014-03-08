@@ -9,17 +9,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import br.ifce.edu.ppd.commons.Client;
 import br.ifce.edu.ppd.commons.IRoom;
 import br.ifce.edu.ppd.commons.IRoomManager;
-import br.ifce.edu.ppd.commons.User;
 import br.ifce.edu.ppd.commons.util.Constants;
+import br.ifce.edu.ppd.commons.util.MessageSingleton;
+
 
 public class RoomManagerImpl extends UnicastRemoteObject implements Serializable,IRoomManager{
 
 	private static final long serialVersionUID = -5730655186581204474L;
 	private Map<String,IRoom> rooms = new HashMap<String,IRoom>();
+	private static MessageSingleton messageSingleton = MessageSingleton.getInstance();
 	
 	protected RoomManagerImpl() throws RemoteException {
 		super();
@@ -46,8 +47,9 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 	    return null;
 	}
 	
-	public Set<Client> getClientsConnectedByRoomName(IRoom room){
-		return rooms.get(room.toString()).getClients();
+	@Override
+	public Set<Client> getClientsConnectedByRoomName(String roomname){
+		return rooms.get(roomname).getClients();
 	}
 
 	@Override
@@ -56,6 +58,7 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 			RoomImpl room = new RoomImpl(roomName, owner); 
 			rooms.put(roomName,room);
 			return true;
+			//TODO: Send message to room
 		}
 		else{
 			return false;
@@ -67,27 +70,23 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 		if(rooms.containsKey(roomName)){
 			if(roomName.equalsIgnoreCase(Constants.ROOM_DEFAULT)){
 				return false;
+				
 			}
 			else if(rooms.get(roomName).getOwner().toString().equals(client.toString())){
+				//rooms.get(roomName).sendBroadcast(message, roomname);
 				rooms.remove(roomName);
-				//TODO: Notify everyone from room
 				return true;
+				//TODO: Send message to room
 			}
 		}
 		return false;	
 	}
 	
 	@Override
-	public void sendMessageToRoom(String roomName, String message, User user){
-		rooms.get(roomName).sendBroadcast(message, user.toString());
-	}
-	
-	@Override
-	public boolean addClientToRoom(String roomName, Client client){
-		if (!rooms.get(roomName).getClients().contains(client)){
-			rooms.get(roomName).getClients().add(client);
+	public boolean sendMessageToRoom(String roomName, String message, Client client){
+		if(rooms.get(roomName) != null && rooms.get(roomName).getClients().contains(client)){
+			rooms.get(roomName).sendBroadcast(message, client.toString());
 			return true;
-			//TODO: Contains not return true
 		}
 		else{
 			return false;
@@ -95,10 +94,22 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 	}
 	
 	@Override
-	public boolean removeClientFromRoom(Client client, String roomName){
+	public boolean addClientToRoom(String roomName, Client client){
+		if (!rooms.get(roomName).getClients().contains(client)){
+			rooms.get(roomName).getClients().add(client);
+			return true;
+			//TODO: Send message to room
+		}
+		else{
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean removeClientFromRoom(String roomName, Client client){
 		if (rooms.get(roomName).getClients().contains(client)){
 			rooms.get(roomName).getClients().remove(client);
-			//TODO: Contains not return true
+			//TODO: Send message to room
 			return true;
 		}
 		else{

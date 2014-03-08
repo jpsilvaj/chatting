@@ -7,6 +7,6 @@ import br.ifce.edu.ppd.client.ClientImpl;
 public interface IRoom{
 	public Client getOwner();
 	public Set<Client> getClients();
-	public void sendBroadcast(String message, String username);
 	public boolean join(ClientImpl client);
+	public void sendBroadcast(String message, String client);
 }

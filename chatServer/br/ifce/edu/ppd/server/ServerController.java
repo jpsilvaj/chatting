@@ -13,25 +13,23 @@ import br.ifce.edu.ppd.commons.IRoom;
 import br.ifce.edu.ppd.server.view.ChatServer;
 
 public class ServerController{
-	static ChatServer chatServer;
-	static RoomManagerImpl roomManager;
+	private static ChatServer chatServer;
+	private static RoomManagerImpl roomManager;
 	static Boolean run = true;
 
 	
 	public static void main(String[] args) {
 		try {
 			LocateRegistry.createRegistry(1099);
-			chatServer = new ChatServer();
+			setChatServer(new ChatServer());
 			roomManager = new RoomManagerImpl();
 			Naming.rebind("//localhost/ChatService", roomManager);
 			TimerUpdateListOfClients timerUpdateClients = new TimerUpdateListOfClients();
 			Timer t = new Timer();
-			t.schedule(new TimerUpdateListOfClients(), 0, 1*1000);
+			t.schedule(new TimerUpdateListOfClients(), 0, 2*1000);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -40,5 +38,20 @@ public class ServerController{
 		//chatServer.getChatLogPanel()
 		//TODO: Implement the routine to logging
 	}
+
+	public static ChatServer getChatServer() {
+		return chatServer;
+	}
+
+	public static void setChatServer(ChatServer chatServer) {
+		ServerController.chatServer = chatServer;
+	}
 	
+	public static RoomManagerImpl getRoomManager() {
+		return roomManager;
+	}
+
+	public static void setRoomManager(RoomManagerImpl roomManager) {
+		ServerController.roomManager = roomManager;
+	}
 }
