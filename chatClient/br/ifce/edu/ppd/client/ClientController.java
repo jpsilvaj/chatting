@@ -59,7 +59,7 @@ public class ClientController{
 	public static void registryInRoom(String roomNameToConnect){
 		try {
 			if(hasConnected){
-				roomManager.removeClientFromRoom(chatClient.getClient().getRoomNameConnected(),chatClient.getClient());
+				exitFromRoom();
 			}
 			roomManager.addClientToRoom(roomNameToConnect, chatClient.getClient());
 			chatClient.getClient().setRoomNameConnected(roomNameToConnect);
@@ -75,7 +75,7 @@ public class ClientController{
 	public static void registryInRoom(){
 		try {
 			if(hasConnected){
-				roomManager.removeClientFromRoom(chatClient.getClient().getRoomNameConnected(),chatClient.getClient());
+				exitFromRoom();
 			}
 			Boolean teste = roomManager.addClientToRoom(Constants.ROOM_DEFAULT, chatClient.getClient());
 			if(teste){
@@ -165,9 +165,6 @@ public class ClientController{
 		try {
 			for(Client client:clients){
 				client.receiveMessage(message);
-				//roomManager.sendMessageToRoom(chatClient.getClient().getRoomNameConnected(),
-					//					  message,
-						//				  chatClient.getClient());
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();

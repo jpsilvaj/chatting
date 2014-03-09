@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
 import br.ifce.edu.ppd.commons.Client;
 import br.ifce.edu.ppd.commons.User;
 import br.ifce.edu.ppd.commons.util.Constants;
@@ -52,10 +55,6 @@ public class ClientImpl extends UnicastRemoteObject implements Client,Serializab
 	public String getHistoryMessage() {
 		return historyMessage;
 	}
-
-	public void appendHistoryMessage(String message) {
-		this.historyMessage += message + "\n";
-	}
 	
 	public void clearHistoryMessage(){
 		this.historyMessage = "";
@@ -88,6 +87,6 @@ public class ClientImpl extends UnicastRemoteObject implements Client,Serializab
 
 	@Override
 	public void receiveMessage(String message) throws RemoteException{
-		appendHistoryMessage(message);
+		this.historyMessage += message + "\n";
 	}
 }

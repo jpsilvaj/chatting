@@ -13,5 +13,5 @@ public interface IRoomManager extends Remote{
 	public boolean deleteRoom(String name, Client client) throws RemoteException;
 	public boolean addClientToRoom(String roomName, Client client) throws RemoteException;
 	public boolean removeClientFromRoom(String roomName, Client client) throws RemoteException;
-	public boolean sendMessageToRoom(String roomName, String message, Client client) throws RemoteException;
+	public boolean sendMessageToRoom(String roomName, String message) throws RemoteException;
 }

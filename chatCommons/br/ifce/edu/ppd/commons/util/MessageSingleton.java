@@ -16,13 +16,15 @@ public class MessageSingleton implements IMessage{
 	}
 	
 	@Override
-	public String joinMessage(String username){
-		return MessageCode.JOIN_MESSAGE.getMessage().replace("%username%", username);
+	public String joinMessage(String username, String roomname){
+		return MessageCode.JOIN_MESSAGE.getMessage().replace("%username%", username)
+													.replace("%roomname%", roomname);
 	}
 	
 	@Override
-	public String exitMessage(String username){
-		return MessageCode.EXIT_MESSAGE.getMessage().replace("%username%", username);
+	public String exitMessage(String username, String roomname){
+		return MessageCode.EXIT_MESSAGE.getMessage().replace("%username%", username)
+													.replace("%roomname%", roomname);
 	}
 
 	@Override

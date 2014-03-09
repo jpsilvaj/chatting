@@ -57,8 +57,9 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 		if(!rooms.containsKey(roomName)){
 			RoomImpl room = new RoomImpl(roomName, owner); 
 			rooms.put(roomName,room);
+			String message = messageSingleton.createRoomMessage(owner.getUsername(), roomName);
+			sendMessageToRoom(roomName, message);
 			return true;
-			//TODO: Send message to room
 		}
 		else{
 			return false;
@@ -73,32 +74,43 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 				
 			}
 			else if(rooms.get(roomName).getOwner().toString().equals(client.toString())){
-				//rooms.get(roomName).sendBroadcast(message, roomname);
 				rooms.remove(roomName);
+				String message = messageSingleton.deleteRoomMessage(client.getUsername(), roomName);
+				sendMessageToRoom(roomName, message);
 				return true;
-				//TODO: Send message to room
 			}
 		}
 		return false;	
 	}
 	
 	@Override
-	public boolean sendMessageToRoom(String roomName, String message, Client client){
-		if(rooms.get(roomName) != null && rooms.get(roomName).getClients().contains(client)){
-			rooms.get(roomName).sendBroadcast(message, client.toString());
-			return true;
+	public boolean sendMessageToRoom(String roomName, String message){
+		for(IRoom room : rooms.values()){
+			for(Client rmiClient : room.getClients()){
+				try {
+					rmiClient.receiveMessage(message);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
-		else{
-			return false;
-		}
+		return true;
 	}
 	
 	@Override
 	public boolean addClientToRoom(String roomName, Client client){
 		if (!rooms.get(roomName).getClients().contains(client)){
 			rooms.get(roomName).getClients().add(client);
+			try {
+				String message;
+				message = messageSingleton.joinMessage(client.getUsername(), roomName);
+				sendMessageToRoom(roomName, message);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return true;
-			//TODO: Send message to room
 		}
 		else{
 			return false;
@@ -109,7 +121,13 @@ public class RoomManagerImpl extends UnicastRemoteObject implements Serializable
 	public boolean removeClientFromRoom(String roomName, Client client){
 		if (rooms.get(roomName).getClients().contains(client)){
 			rooms.get(roomName).getClients().remove(client);
-			//TODO: Send message to room
+			try {
+				String message;
+				message = messageSingleton.exitMessage(client.getUsername(), roomName);
+				sendMessageToRoom(roomName, message);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 			return true;
 		}
 		else{

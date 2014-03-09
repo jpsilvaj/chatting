@@ -14,10 +14,10 @@ public final class RoomManagerImpl_Skel
 	new java.rmi.server.Operation("br.ifce.edu.ppd.commons.IRoom getRoomByClient(br.ifce.edu.ppd.commons.Client)"),
 	new java.rmi.server.Operation("java.util.List getRoomList()"),
 	new java.rmi.server.Operation("boolean removeClientFromRoom(java.lang.String, br.ifce.edu.ppd.commons.Client)"),
-	new java.rmi.server.Operation("boolean sendMessageToRoom(java.lang.String, java.lang.String, br.ifce.edu.ppd.commons.Client)")
+	new java.rmi.server.Operation("boolean sendMessageToRoom(java.lang.String, java.lang.String)")
     };
     
-    private static final long interfaceHash = 8587063033422795022L;
+    private static final long interfaceHash = -7300004129747366432L;
     
     public java.rmi.server.Operation[] getOperations() {
 	return (java.rmi.server.Operation[]) operations.clone();
@@ -41,7 +41,7 @@ public final class RoomManagerImpl_Skel
 		opnum = 5;
 	    } else if (hash == 123582668454815300L) {
 		opnum = 6;
-	    } else if (hash == 9063318395057068277L) {
+	    } else if (hash == 761170567229713928L) {
 		opnum = 7;
 	    } else {
 		throw new java.rmi.UnmarshalException("invalid method hash");
@@ -212,16 +212,14 @@ public final class RoomManagerImpl_Skel
 	    break;
 	}
 	    
-	case 7: // sendMessageToRoom(String, String, Client)
+	case 7: // sendMessageToRoom(String, String)
 	{
 	    java.lang.String $param_String_1;
 	    java.lang.String $param_String_2;
-	    br.ifce.edu.ppd.commons.Client $param_Client_3;
 	    try {
 		java.io.ObjectInput in = call.getInputStream();
 		$param_String_1 = (java.lang.String) in.readObject();
 		$param_String_2 = (java.lang.String) in.readObject();
-		$param_Client_3 = (br.ifce.edu.ppd.commons.Client) in.readObject();
 	    } catch (java.io.IOException e) {
 		throw new java.rmi.UnmarshalException("error unmarshalling arguments", e);
 	    } catch (java.lang.ClassNotFoundException e) {
@@ -229,7 +227,7 @@ public final class RoomManagerImpl_Skel
 	    } finally {
 		call.releaseInputStream();
 	    }
-	    boolean $result = server.sendMessageToRoom($param_String_1, $param_String_2, $param_Client_3);
+	    boolean $result = server.sendMessageToRoom($param_String_1, $param_String_2);
 	    try {
 		java.io.ObjectOutput out = call.getResultStream(true);
 		out.writeBoolean($result);

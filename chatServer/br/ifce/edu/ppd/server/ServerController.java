@@ -2,8 +2,11 @@ package br.ifce.edu.ppd.server;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Timer;
 
 import javax.swing.JTextArea;

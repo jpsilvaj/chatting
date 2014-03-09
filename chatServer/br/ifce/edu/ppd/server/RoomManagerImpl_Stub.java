@@ -15,10 +15,10 @@ public final class RoomManagerImpl_Stub
 	new java.rmi.server.Operation("br.ifce.edu.ppd.commons.IRoom getRoomByClient(br.ifce.edu.ppd.commons.Client)"),
 	new java.rmi.server.Operation("java.util.List getRoomList()"),
 	new java.rmi.server.Operation("boolean removeClientFromRoom(java.lang.String, br.ifce.edu.ppd.commons.Client)"),
-	new java.rmi.server.Operation("boolean sendMessageToRoom(java.lang.String, java.lang.String, br.ifce.edu.ppd.commons.Client)")
+	new java.rmi.server.Operation("boolean sendMessageToRoom(java.lang.String, java.lang.String)")
     };
     
-    private static final long interfaceHash = 8587063033422795022L;
+    private static final long interfaceHash = -7300004129747366432L;
     
     private static final long serialVersionUID = 2;
     
@@ -49,7 +49,7 @@ public final class RoomManagerImpl_Stub
 	    $method_getRoomByClient_4 = br.ifce.edu.ppd.commons.IRoomManager.class.getMethod("getRoomByClient", new java.lang.Class[] {br.ifce.edu.ppd.commons.Client.class});
 	    $method_getRoomList_5 = br.ifce.edu.ppd.commons.IRoomManager.class.getMethod("getRoomList", new java.lang.Class[] {});
 	    $method_removeClientFromRoom_6 = br.ifce.edu.ppd.commons.IRoomManager.class.getMethod("removeClientFromRoom", new java.lang.Class[] {java.lang.String.class, br.ifce.edu.ppd.commons.Client.class});
-	    $method_sendMessageToRoom_7 = br.ifce.edu.ppd.commons.IRoomManager.class.getMethod("sendMessageToRoom", new java.lang.Class[] {java.lang.String.class, java.lang.String.class, br.ifce.edu.ppd.commons.Client.class});
+	    $method_sendMessageToRoom_7 = br.ifce.edu.ppd.commons.IRoomManager.class.getMethod("sendMessageToRoom", new java.lang.Class[] {java.lang.String.class, java.lang.String.class});
 	} catch (java.lang.NoSuchMethodException e) {
 	    useNewInvoke = false;
 	}
@@ -328,13 +328,13 @@ public final class RoomManagerImpl_Stub
 	}
     }
     
-    // implementation of sendMessageToRoom(String, String, Client)
-    public boolean sendMessageToRoom(java.lang.String $param_String_1, java.lang.String $param_String_2, br.ifce.edu.ppd.commons.Client $param_Client_3)
+    // implementation of sendMessageToRoom(String, String)
+    public boolean sendMessageToRoom(java.lang.String $param_String_1, java.lang.String $param_String_2)
 	throws java.rmi.RemoteException
     {
 	try {
 	    if (useNewInvoke) {
-		Object $result = ref.invoke(this, $method_sendMessageToRoom_7, new java.lang.Object[] {$param_String_1, $param_String_2, $param_Client_3}, 9063318395057068277L);
+		Object $result = ref.invoke(this, $method_sendMessageToRoom_7, new java.lang.Object[] {$param_String_1, $param_String_2}, 761170567229713928L);
 		return ((java.lang.Boolean) $result).booleanValue();
 	    } else {
 		java.rmi.server.RemoteCall call = ref.newCall((java.rmi.server.RemoteObject) this, operations, 7, interfaceHash);
@@ -342,7 +342,6 @@ public final class RoomManagerImpl_Stub
 		    java.io.ObjectOutput out = call.getOutputStream();
 		    out.writeObject($param_String_1);
 		    out.writeObject($param_String_2);
-		    out.writeObject($param_Client_3);
 		} catch (java.io.IOException e) {
 		    throw new java.rmi.MarshalException("error marshalling arguments", e);
 		}

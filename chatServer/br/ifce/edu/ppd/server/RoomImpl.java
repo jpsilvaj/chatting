@@ -62,6 +62,8 @@ public class RoomImpl implements Serializable, IRoom{
 
 	@Override
 	public void sendBroadcast(String message, String username) {
-		// TODO Implement broadcastMessage
+		for( Client client : clients){
+			System.out.println(client);
+		}
 	}
 }
